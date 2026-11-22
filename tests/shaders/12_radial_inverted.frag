@@ -1,5 +1,5 @@
 {
-    // Inverted radial (bright center, dark edges)
+    // use a bright center and dark edges.
     float x = gl_FragCoord[0] / 800.0 - 0.5;
     float y = gl_FragCoord[1] / 600.0 - 0.5;
     float dist = x * x + y * y;

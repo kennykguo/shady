@@ -1,5 +1,5 @@
 {
-    // Corner to corner diagonal
+    // multiply the horizontal and vertical gradients.
     float x = gl_FragCoord[0] / 800.0;
     float y = gl_FragCoord[1] / 600.0;
     float val = x * y;

@@ -4,153 +4,142 @@
 
 #include <stdarg.h>
 
-enum {
-  DP3 = 0, 
-  LIT = 1, 
-  RSQ = 2
-};
+enum { DP3 = 0, LIT = 1, RSQ = 2, SIN, COS, FRACT, ABS };
 
-// Dummy node just so everything compiles, create your own node/nodes
-//
-// The code provided below is an example ONLY. You can use/modify it,
-// but do not assume that it is correct or complete
-//
-// There are many ways of making AST nodes. The approach below is an example
-// of a discriminated union. If you choose to use C++, then I suggest looking
-// into inheritance
+// the node kind selects the fields used in the union.
 
-// forward declare
+// declare the node type before use.
 struct node_;
 typedef struct node_ node;
 extern node *ast;
 
 typedef enum {
     UNKNOWN = 0,
-    
-    // expressions
+
+    // these node kinds describe expressions.
     BINARY_EXPR_NODE,
     UNARY_EXPR_NODE,
     BOOL_LITERAL_NODE,
     INT_LITERAL_NODE,
     FLOAT_LITERAL_NODE,
-    VAR_NODE, // variable reference (x / x[2],..,)
-    FUNCTION_NODE, // function call (dp3, rsq, lit,..,)
-    CONSTRUCTOR_NODE, // type constructor (vec3(,...,))
-    
-    // statements
+    VAR_NODE,         // read a variable or a vector component.
+    FUNCTION_NODE,    // call a built-in function.
+    CONSTRUCTOR_NODE, // construct a value of the requested type.
+
+    // these node kinds describe statements.
     ASSIGNMENT_NODE,
     IF_STMT_NODE,
     SCOPE_NODE,
-    
-    // declarations
+
+    // these node kinds describe declarations.
     DECLARATION_NODE,
-    DECLARATIONS_NODE, // list of declarations
-    
-    // statements list
+    DECLARATIONS_NODE, // store a list of declarations.
+
+    // store a list of statements.
     STATEMENTS_NODE,
-    
-    // type nodes
+
+    // store a declared type.
     TYPE_NODE,
-    
-    // arguments list
+
+    // store a list of arguments.
     ARGUMENTS_NODE
 } node_kind;
 
 struct node_ {
     node_kind kind;
-    
-    int result_type; // INT_T, FLOAT_T, etc.
-    int result_vec_size; // 0 for scalars, 0-2 for vec2/3/4
+
+    int result_type;     // the type from the parser.
+    int result_vec_size; // zero means scalar. vector sizes are the component count minus one.
 
     union {
-        // binary expression - left op right
+        // store the operator and its two operands.
         struct {
             int op;
             node *left;
             node *right;
         } binary_expr;
-        
-        // unary expression - op operand
+
+        // store the operator and its operand.
         struct {
             int op;
             node *operand;
         } unary_expr;
-        
-        // literals
+
+        // store literal values.
         struct {
             int value;
         } int_literal;
-        
+
         struct {
             float value;
         } float_literal;
-        
+
         struct {
-            int value;  // 0 = false, 1 = true
+            int value; // zero means false. one means true.
         } bool_literal;
-        
-        // variable - identifier or identifier[index]
+
+        // store a variable name and an optional component index.
         struct {
             char *identifier;
-            int is_array; // 0 if just 'x', 1 if 'x[i]'
-            int array_index; // only valid if is_array == 1
+            int is_array;    // set when a vector component is selected.
+            int array_index; // use this index only when a component is selected.
         } variable;
-        
-        // function call - - func_name(args)
+
+        // store a built-in function call.
         struct {
-            int func_id; // DP3=0, LIT=1, RSQ=2
-            node *arguments; // ARGUMENTS_NODE
+            int func_id;     // identify the built-in function.
+            node *arguments; // point to the argument list.
         } function;
-        
-        // constructor - - type(args)
+
+        // store the type and constructor arguments.
         struct {
-            node *type; // TYPE_NODE
-            node *arguments; // ARGUMENTS_NODE
+            node *type;      // point to the type node.
+            node *arguments; // point to the argument list.
         } constructor;
-        
-        // assignment - - var = expr
+
+        // store the assignment target and value.
         struct {
-            node *variable; // VAR_NODE
-            node *expr; // expression
+            node *variable; // point to the variable node.
+            node *expr;     // point to the expression node.
         } assignment;
-        
-        // if statement
+
+        // store a condition and its branches.
         struct {
-            node *condition; // expression
-            node *then_stmt; // statement
-            node *else_stmt; // statement or NULL
+            node *condition; // point to the expression node.
+            node *then_stmt; // point to the statement node.
+            node *else_stmt; // point to the false branch if one is present.
         } if_stmt;
-        
-        // scope - - { declarations statements }
+
+        // store the declarations and statements for one scope.
         struct {
-            node *declarations; // DECLARATIONS_NODE
-            node *statements; // STATEMENTS_NODE
+            node *declarations; // point to the declaration list.
+            node *statements;   // point to the statement list.
         } scope;
-        
-        // declaration - - [const] type id [= expr]
+
+        // store a name and type with an optional initial value.
         struct {
             int is_const;
-            node *type; // TYPE_NODE
+            node *type; // point to the type node.
             char *identifier;
-            node *initializer; // expression or NULL
+            node *initializer; // point to the initial value if one is present.
         } declaration;
-        
-        // type
+
+        // store the type and vector size.
         struct {
-            int type_code; // from parser - - INT_T, FLOAT_T, etc.
-            int vec_size; // 0 for scalars, 1-3 for vec2/3/4
+            int type_code; // use the type code from the parser.
+            int vec_size;  // zero means scalar. vector sizes are the component count minus one.
         } type;
-        
-        // linked list nodes
+
+        // connect nodes in a list.
         struct {
-            node *item; // the actual node
-            node *next; // next in list or NULL
+            node *item; // point to the list item.
+            node *next; // point to the next item if one is present.
         } list;
     };
 };
 
 node *ast_allocate(node_kind type, ...);
 void ast_free(node *ast);
-void ast_print(node * ast);
+void ast_print(node *ast);
 
-#endif /* AST_H_ */
+#endif /* end the syntax tree header. */

@@ -1,5 +1,5 @@
 {
-    // Offset radial
+    // move the center of the distance pattern.
     float x = gl_FragCoord[0] / 800.0 - 0.7;
     float y = gl_FragCoord[1] / 600.0 - 0.3;
     float dist = x * x + y * y;

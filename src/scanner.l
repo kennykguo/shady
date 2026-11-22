@@ -1,12 +1,8 @@
 %{
-/**********************************************************************
- *
- * **YOUR GROUP INFO SHOULD GO HERE**
- *
- *  Interface to the scanner module for CSC467 course project
- **********************************************************************/
+/* convert shader text into tokens. */
 
 #include <stdlib.h>
+#include <errno.h>
 #include <limits.h>
 #include <float.h>
 #include <math.h>
@@ -18,11 +14,10 @@
 
 #define YY_USER_INIT { yyin = inputFile; }
 #define yyinput      input
-#define yTRACE(x)    { if (traceScanner) fprintf(traceFile, "TOKEN %3d : %s\n", x, yytext); }
-#define yERROR(x)    { fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: %s\n", yyline, x); errorOccurred = TRUE; }
-#define yOUT(x)      { yTRACE(x); return x; }
+#define yERROR(x)    { fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: %s\n", yyline, x); errorOccurred = 1; }
+#define yOUT(x)      { return x; }
 
-/* forward declarations */
+/* declare functions before use. */
 int ParseComment(void);
 int ParseInt(void);
 int ParseFloat(void);
@@ -30,12 +25,12 @@ int ParseIdent(void);
 int yyline = 1;
 
 %}
-%option noyywrap
+%option noyywrap nounput
 
 %%
 
 "/*"                          { if(!ParseComment()) { yyterminate(); } }
-"//"[^\n]*                    { /* skip single-line comment */ }
+"//"[^\n]*                    { /* skip the line comment. */ }
 
 [ \t]                         { }
 \r?\n                         { yyline++; }
@@ -67,6 +62,10 @@ else                          { yOUT(ELSE); }
 dp3                           { yylval.as_func = 0; yOUT(FUNC); }
 rsq                           { yylval.as_func = 2; yOUT(FUNC); }
 lit                           { yylval.as_func = 1; yOUT(FUNC); }
+sin                           { yylval.as_func = SIN; yOUT(FUNC); }
+cos                           { yylval.as_func = COS; yOUT(FUNC); }
+fract                         { yylval.as_func = FRACT; yOUT(FUNC); }
+abs                           { yylval.as_func = ABS; yOUT(FUNC); }
 
 true                          { yOUT(TRUE_C); }
 false                         { yOUT(FALSE_C); }
@@ -86,38 +85,32 @@ false                         { yOUT(FALSE_C); }
 
 %%
 
-/* Constants used later */
+/* define the function token values. */
 enum {
   MAX_INT_LIT = (1 << 21) - 1,
   MIN_INT_LIT = -MAX_INT_LIT,
   MAX_IDENT_LEN = 32
 };
 
-/* Eat a C-style comment. */
+/* read a block comment and update the line count. */
 int ParseComment(void) {
-  int c1 = 0;
-  int c2 = yyinput();
-  int curline = yyline;
-  for(;;) {
-    if (c2 == EOF) {
-      fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: Unmatched /*\n", curline);
-      errorOccurred = TRUE;
-      return 0;
+    int previous = 0;
+    int start_line = yyline;
+    int current;
+    /* the scanner returns zero at the end of input. */
+    while ((current = yyinput()) != 0) {
+        if (current == '\n') yyline++;
+        if (previous == '*' && current == '/') return 1;
+        previous = current;
     }
-    if ('*' == c1 && '/' == c2) {
-      break;
-    }
-    c1 = c2;
-    c2 = yyinput();
-    if ('\n' == c1 && EOF != c2) {
-      yyline++;
-    }
-  }
-  return 1;
+    fprintf(errorFile, "\nLEXICAL ERROR, LINE %d: Unmatched /*\n", start_line);
+    errorOccurred = 1;
+    return 0;
 }
 
-/* Convert a string to an integer token. */
+/* convert text into an integer token. */
 int ParseInt(void) {
+  errno = 0;
   long num = strtol(yytext, NULL, 10);
   if(ERANGE == errno) {
     if(LONG_MAX == num || LONG_MIN == num) {
@@ -135,8 +128,9 @@ int ParseInt(void) {
   return 1;
 }
 
-/* Convert a string to a float token. */
+/* convert text into a floating point token. */
 int ParseFloat(void) {
+  errno = 0;
   double num = strtod(yytext, NULL);
   
   if(ERANGE == errno) {
@@ -146,13 +140,13 @@ int ParseFloat(void) {
     }
   }
 
-  /* a NaN value; this is weird */
+  /* reject values that are not numbers. */
   if(num != num) {
     yERROR("Floating point literal is NaN.");
     return 0;
   }
 
-  /* out of range; we consider overflow but not underflow */
+  /* reject overflow. this check does not reject underflow. */
   if(FLT_MAX < num || -FLT_MAX > num) {
     yERROR("Floating point literal is out of range (case 2).");
     return 0;
@@ -162,7 +156,7 @@ int ParseFloat(void) {
   return 1;
 }
 
-/* Convert a string into an identifier token. */
+/* copy the text for an identifier token. */
 int ParseIdent(void) {
   if(MAX_IDENT_LEN < yyleng) {
     yERROR("Identifier is too long.");

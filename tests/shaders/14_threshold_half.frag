@@ -1,5 +1,5 @@
 {
-    // Threshold test (half and half)
+    // split the image at the middle.
     float x = gl_FragCoord[0] / 800.0;
     
     vec4 color;

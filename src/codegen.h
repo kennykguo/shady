@@ -4,7 +4,7 @@
 #include "ast.h"
 #include <stdio.h>
 
-// main entry point
+// write the checked syntax tree as assembly.
 void generate_code(node *ast, FILE *output);
 
 #endif

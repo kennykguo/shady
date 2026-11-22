@@ -1,5 +1,5 @@
 {
-    // Stripes pattern (vertical)
+    // draw vertical stripes.
     float x = gl_FragCoord[0] / 800.0;
     float stripe = 0.0;
     
