@@ -7,14 +7,14 @@ I got curious about compiler theory after reading the Dragon Book. I wanted to
 build something where I could follow the whole path from source code to a result
 on my GPU. Shaders seemed like a good way to do that.
 
-![Six shaders compiled by Shady and rendered on a teapot](docs/images/shader-atlas.png)
 
 These are actual renders from the compiler's output on an RTX 3060, cropped and
 arranged into a grid. The shader sources are in [`tests/shaders/`](tests/shaders/).
 
-## How it works
 
-![Compiler stages, from scanning MiniGLSL through Vulkan rendering](docs/images/pipeline.svg)
+<img width="6144" height="1712" alt="teapot-workspace-8x16" src="https://github.com/user-attachments/assets/8a29c254-91af-4d7b-b143-0c5647efd03c" />
+
+## How it works
 
 The scanner turns the source into tokens. The parser builds an abstract syntax
 tree, and the semantic checker walks that tree to resolve names and check types.
@@ -29,7 +29,6 @@ arm to `OpSelect` operations. It evaluates expressions and uses a predicate to
 choose which values get stored. Nested conditions combine predicates with
 `OpLogicalAnd`.
 
-![How a condition becomes predicated component assignments](docs/images/predication.svg)
 
 That diagram is a simplified view of
 [`14_threshold_half.frag`](tests/shaders/14_threshold_half.frag). Each assignment
