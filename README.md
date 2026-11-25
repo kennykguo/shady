@@ -7,12 +7,19 @@ I got curious about compiler theory after reading the Dragon Book. I wanted to
 build something where I could follow the whole path from source code to a result
 on my GPU. Shaders seemed like a good way to do that.
 
+[![Sixteen vibrant gradient materials on orbiting teapots](docs/videos/teapots-2x8.gif)](docs/videos/teapots-2x8.mp4)
 
-These are actual renders from the compiler's output on an RTX 3060, cropped and
-arranged into a grid. The shader sources are in [`tests/shaders/`](tests/shaders/).
+Sixteen surface shaders, from simple spectrum and sunset gradients to layered
+iridescent flows, compiled by Shady and rendered with Vulkan on an RTX 3060.
+The camera makes a seamless eight-second spherical orbit. Patterns stay attached
+to the mesh and are lit using its normals through the existing shader inputs.
 
+[Watch the MP4](docs/videos/teapots-2x8.mp4) ·
+[View the autoplay grid on my website](https://kennykguo.com/rollouts/) ·
+[Read the shader sources](examples/turntable/)
 
-<img width="6144" height="1712" alt="teapot-workspace-8x16" src="https://github.com/user-attachments/assets/8a29c254-91af-4d7b-b143-0c5647efd03c" />
+The fragment shaders go through Shady → `spirv-as` → `spirv-val`. The small orbit
+vertex shader is compiled with glslang. No compiler changes were needed.
 
 ## How it works
 

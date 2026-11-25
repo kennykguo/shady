@@ -1,0 +1,82 @@
+[
+  {
+    "shader": "01_spectrum_glaze.frag",
+    "title": "Spectrum glaze",
+    "complexity": "simple"
+  },
+  {
+    "shader": "02_sunset_porcelain.frag",
+    "title": "Sunset porcelain",
+    "complexity": "simple"
+  },
+  {
+    "shader": "03_tropical_diagonal.frag",
+    "title": "Tropical diagonal",
+    "complexity": "simple"
+  },
+  {
+    "shader": "04_violet_lagoon.frag",
+    "title": "Violet lagoon",
+    "complexity": "simple"
+  },
+  {
+    "shader": "05_aurora_silk.frag",
+    "title": "Aurora silk",
+    "complexity": "medium"
+  },
+  {
+    "shader": "06_solar_ribbons.frag",
+    "title": "Solar ribbons",
+    "complexity": "medium"
+  },
+  {
+    "shader": "07_iridescent_pearl.frag",
+    "title": "Iridescent pearl",
+    "complexity": "medium"
+  },
+  {
+    "shader": "08_prismatic_tide.frag",
+    "title": "Prismatic tide",
+    "complexity": "medium"
+  },
+  {
+    "shader": "09_liquid_opal.frag",
+    "title": "Liquid opal",
+    "complexity": "medium"
+  },
+  {
+    "shader": "10_coral_aurora.frag",
+    "title": "Coral aurora",
+    "complexity": "medium"
+  },
+  {
+    "shader": "11_peacock_silk.frag",
+    "title": "Peacock silk",
+    "complexity": "medium"
+  },
+  {
+    "shader": "12_rainbow_clouds.frag",
+    "title": "Rainbow clouds",
+    "complexity": "medium"
+  },
+  {
+    "shader": "13_chromatic_flow.frag",
+    "title": "Chromatic flow",
+    "complexity": "medium"
+  },
+  {
+    "shader": "14_nebula_glaze.frag",
+    "title": "Nebula glaze",
+    "complexity": "medium"
+  },
+  {
+    "shader": "15_northern_lights.frag",
+    "title": "Northern lights",
+    "complexity": "medium"
+  },
+  {
+    "shader": "16_molten_rainbow.frag",
+    "title": "Molten rainbow",
+    "complexity": "medium"
+  }
+]
