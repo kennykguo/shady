@@ -7,10 +7,12 @@ I got curious about compiler theory after reading the Dragon Book. I wanted to
 build something where I could follow the whole path from source code to a result
 on my GPU. Shaders seemed like a good way to do that.
 
-[![Sixteen vibrant gradient materials on orbiting teapots](docs/videos/teapots-2x8.gif)](docs/videos/teapots-2x8.mp4)
+[![Sixteen distinct surface materials on orbiting teapots](docs/videos/teapots-2x8.gif)](docs/videos/teapots-2x8.mp4)
 
-Sixteen surface shaders, from simple spectrum and sunset gradients to layered
-iridescent flows, compiled by Shady and rendered with Vulkan on an RTX 3060.
+Sixteen visually distinct surface shaders: sunset and lagoon gradients, pearl
+iridescence, copper patina, molten veins, cobalt porcelain, mineral bands,
+color-blocked panels, enamel droplets, and more. Compiled by Shady and rendered
+with Vulkan on an RTX 3060.
 The camera makes a seamless eight-second spherical orbit. Patterns stay attached
 to the mesh and are lit using its normals through the existing shader inputs.
 

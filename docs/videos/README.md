@@ -1,8 +1,11 @@
-# Orbiting gradient teapots
+# Orbiting surface materials
 
 The sixteen numbered MP4s are silent, 384 × 288, 24 fps, eight-second loops.
 `teapots-2x8.mp4` combines them in two rows of eight. The GIF is the smaller,
 autoplaying README preview; the JPEGs are first-frame video posters.
+
+The sixteen clips vary both color palettes and surface structure, including
+gradients, marbling, patina, enamel, patterns, and view-dependent sheen.
 
 All fragment programs are compiled by Shady and validated for Vulkan 1.0. The
 camera and object-coordinate/normal inputs come from `tools/turntable.vert`,

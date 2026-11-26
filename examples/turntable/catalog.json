@@ -1,82 +1,98 @@
 [
   {
-    "shader": "01_spectrum_glaze.frag",
-    "title": "Spectrum glaze",
-    "complexity": "simple"
+    "shader": "01_sunset_ombre.frag",
+    "title": "Sunset ombre",
+    "appearance": "Broad indigo, coral, and apricot vertical gradient.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "02_sunset_porcelain.frag",
-    "title": "Sunset porcelain",
-    "complexity": "simple"
+    "shader": "02_lagoon_bloom.frag",
+    "title": "Lagoon bloom",
+    "appearance": "Turquoise-to-lime pools over a deep blue glaze.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "03_tropical_diagonal.frag",
-    "title": "Tropical diagonal",
-    "complexity": "simple"
+    "shader": "03_aurora_curtain.frag",
+    "title": "Aurora curtain",
+    "appearance": "Emerald and violet broad flowing color curtains.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "04_violet_lagoon.frag",
-    "title": "Violet lagoon",
-    "complexity": "simple"
+    "shader": "04_pearl_iridescence.frag",
+    "title": "Pearl iridescence",
+    "appearance": "Pale pearl with camera-dependent pink and cyan sheen.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "05_aurora_silk.frag",
-    "title": "Aurora silk",
-    "complexity": "medium"
+    "shader": "05_copper_patina.frag",
+    "title": "Copper patina",
+    "appearance": "Teal oxidation islands on warm polished copper.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "06_solar_ribbons.frag",
-    "title": "Solar ribbons",
-    "complexity": "medium"
+    "shader": "06_lava_veins.frag",
+    "title": "Lava veins",
+    "appearance": "Orange-gold molten veins in a dark plum ceramic.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "07_iridescent_pearl.frag",
-    "title": "Iridescent pearl",
-    "complexity": "medium"
+    "shader": "07_cobalt_porcelain.frag",
+    "title": "Cobalt porcelain",
+    "appearance": "Cream porcelain with broad flowing cobalt marbling.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "08_prismatic_tide.frag",
-    "title": "Prismatic tide",
-    "complexity": "medium"
+    "shader": "08_malachite_gold.frag",
+    "title": "Malachite gold",
+    "appearance": "Layered emerald mineral bands with sparse golden seams.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "09_liquid_opal.frag",
-    "title": "Liquid opal",
-    "complexity": "medium"
+    "shader": "09_prismatic_panels.frag",
+    "title": "Prismatic panels",
+    "appearance": "Large angled blocks with local jewel-colored gradients.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "10_coral_aurora.frag",
-    "title": "Coral aurora",
-    "complexity": "medium"
+    "shader": "10_coral_ribbons.frag",
+    "title": "Coral ribbons",
+    "appearance": "Soft coral ribbons across a pink and cream glaze.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "11_peacock_silk.frag",
-    "title": "Peacock silk",
-    "complexity": "medium"
+    "shader": "11_enamel_droplets.frag",
+    "title": "Enamel droplets",
+    "appearance": "Soft coral droplets in turquoise enamel.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "12_rainbow_clouds.frag",
-    "title": "Rainbow clouds",
-    "complexity": "medium"
+    "shader": "12_honeycomb_foil.frag",
+    "title": "Honeycomb foil",
+    "appearance": "Gold cellular lattice over navy blue.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "13_chromatic_flow.frag",
-    "title": "Chromatic flow",
-    "complexity": "medium"
+    "shader": "13_electric_velvet.frag",
+    "title": "Electric velvet",
+    "appearance": "Deep violet body with an electric cyan camera-dependent rim.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "14_nebula_glaze.frag",
-    "title": "Nebula glaze",
-    "complexity": "medium"
+    "shader": "14_opal_brushed_metal.frag",
+    "title": "Opal brushed metal",
+    "appearance": "Cool silver with a subtle cyan-peach sweep and fine brushed highlights.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "15_northern_lights.frag",
-    "title": "Northern lights",
-    "complexity": "medium"
+    "shader": "15_neon_current.frag",
+    "title": "Neon current",
+    "appearance": "Turquoise and hot-pink glowing flowing contours on dark blue.",
+    "complexity": "simple-medium"
   },
   {
-    "shader": "16_molten_rainbow.frag",
-    "title": "Molten rainbow",
-    "complexity": "medium"
+    "shader": "16_jewel_patchwork.frag",
+    "title": "Jewel patchwork",
+    "appearance": "Multicolor tile panels with soft internal color transitions.",
+    "complexity": "simple-medium"
   }
 ]
